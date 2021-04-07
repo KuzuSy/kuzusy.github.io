@@ -35,7 +35,9 @@
     <div class="main">
         <div class="§">
             <input id="site" type="text" placeholder="site"><br>
-            <input type="button" value="add" onclick="add()"><input type="button" value="del last" onclick="$('iframe').last().remove()">
+            <input type="button" value="add" onclick="add()">
+            <input type="button" value="jump" onclick="jump()">
+            <input type="button" value="del last" onclick="$('iframe').last().remove()">
         </div>
         <div class="§">
             <input id="account" type="text" placeholder="account">
@@ -66,6 +68,10 @@
             });
             $(".§").eq(0).append(iframe);
             iframe.animate({height:"600px"},2000)
+        }
+        function jump()
+        {
+            window.location.href=$("#site")[0].value;
         }
         function getNoteToken()
         {
