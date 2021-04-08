@@ -56,48 +56,6 @@
 		var web=document.getElementById("href").value;
 		window.location.href=web;
 	}
-	 function robotCreate()
-	{
-		var robotID=document.getElementById("robotID").value;
-	  	var href='https://yzf.qq.com/xv/web/static/chat/index.html?inner=1&sign=37ef9b9787210ac32144cfe91de6b434874472d5285f4a01eceab5e4f154eafaa3deecd5e74169af9f6ab0862b7570dac6038d&uid=sxz.school.zykj.org_'+robotID;
-		document.getElementById("robot").innerHTML='<iframe id="robot_iframe" src="'+href+'" width=375px height=667px></iframe>';
-	}
-	function musicAdd()
-	{
-		var fdiv=document.getElementById("div_music");
-		var id=document.getElementById("music_id").value;
-		var p=document.createElement('div');p.id="music";
-		p.innerHTML='<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id='
-		+id+'&height=66"></iframe>';
-		var first=fdiv.firstChild;
-		fdiv.insertBefore(p,first);
-	}
-	function imgCreate()
-	{
-		var src=document.getElementById("src").value;
-		var width=document.getElementById("width").value;
-	  	var fdiv=document.getElementById("div_img");
-		var p=document.createElement('div');p.id="img";
-		p.innerHTML=
-	 	'<img src="'+src+'" width='+width+"px />";
-		var first=fdiv.firstChild;
-		fdiv.insertBefore(p,first);
-	}
-	function videoCreate()
-	{
-		var video=document.getElementById("video").value;
-	  	document.getElementById("div_video").innerHTML=
-	 	'<video controls="controls" height="375px" src="'+video+'"></video>';
-	}
-	  function a()
-	{
-		var kkk=document.getElementById("kkk").value;
-		window.parent.location.href=kkk;
-	}
-	function getURL()
-	{
-		document.getElementById("iframe_url").value=parent.document.getElementById("iframe").contentWindow.location.href;
-	}
  </script>
  </head>
 <body background="bg.jpg" style="background-color:#555555;background-size:cover;background-position:center;background-repeat:default;background-attachment:fixed;color:white">
@@ -116,25 +74,7 @@
 <input type="text" id="href" placeholder="输入网址"  style="width:100px" /><br />
 <input type="button" value="生成网页" onclick="webCreate()" />
 <input type="button" value="跳转网页" onclick="webJump()" />
-<input type="button" value="爆破网页" onclick="destroyDiv('iframe')" /><br />
-<input type="text" id="src" placeholder="图片地址" style="width:100px" />
-<input type="text" id="width" placeholder="宽度" style="width:40px" /><br />
-<input type="button" value="生成图片" onclick="imgCreate()" />
-<input type="button" value="消除图片" onclick="destroyDiv('img')" /><br />
-<input type="text" id="music_id" placeholder="歌曲id" style="width:100px" /><br />
-<input type="button" value="添加" onclick="musicAdd()" /><input type="button" value="删除" onclick="destroyDiv('music')" /><br >
-<input type="text" id="robotID" placeholder="输入学号"  style="width:100px" /><br />
-<input type="button" value="生成机器人窗口" onclick="robotCreate()" /><br />
-<input type="text" id="video" placeholder="视频地址"  style="width:100px" /><br />
-<input type="button" value="生成" onclick="videoCreate()" /><br />
-<input type="text" value="http://ezy-sxz.oss-cn-hangzhou.aliyuncs.com/appstore/%E4%B8%AD%E8%82%B2%E4%BA%91%E7%AC%94%E8%AE%B01.6.6.apk" id="kkk" placeholder="...."  style="width:100px" /><br />
-<input type="button" value="test" onclick="a()" /><br />
-<input type="text" id="iframe_url" /><br />
-<input type="button" value="获取" onclick="getURL()" />
 </div>
 	
 <div id="div1" style="width:100%"></div>
-<div id="div_music"></div>
-<div id="div_img"></div>
-<div id="div_video" ></div>
 </html>
