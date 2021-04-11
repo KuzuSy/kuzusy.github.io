@@ -18,28 +18,28 @@ animation:rotates 10s infinite;
 .sq{
 z-index:2;
 position:absolute;
-width:400px;
-height:400px;
+width:200px;
+height:200px;
 }
 .front{
 background-size:cover;
 background-image: url("bg.jpg");
-transform:translateZ(200px) rotateY(0deg)
+transform:translateZ(100px) rotateY(0deg)
 }
 .left{
 background-size:cover;
 background-image: url("HTML/animeSource/bg5.jpg");
-transform:translateX(200px) rotateY(90deg)
+transform:translateX(100px) rotateY(90deg)
 }
 .back{
 background-size:cover;
 background-image: url("HTML/animeSource/illusion2.jpg");
-transform:translateZ(-200px) rotateY(0deg)
+transform:translateZ(-100px) rotateY(0deg)
 }
 .right{
 background-size:cover;
 background-image: url("HTML/animeSource/bg2.jpg");
-transform:translateX(-200px) rotateY(-90deg)
+transform:translateX(-100px) rotateY(-90deg)
 }
 	body{
 		cursor:url('cur/default.cur'),default;
@@ -116,5 +116,5 @@ transform:translateX(-200px) rotateY(-90deg)
 <input type="button" value="跳转网页" onclick="webJump()" />
 </div><div class="sq stage"><div class="sq front"></div><div class="sq back"></div><div class="sq left"></div><div class="sq right"></div></div>
 	
-<div id="div1" style="width:100%"></div>
+<div id="div1" style="width:100%;z-index:999"></div>
 </html>
