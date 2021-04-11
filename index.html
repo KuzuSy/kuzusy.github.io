@@ -14,7 +14,8 @@ perspective:100;
 perspective-origin:center center;
 animation:rotates 10s infinite;
 }
-@keyframes rotates{to{transform:translateY(-100px) translateX(950px) rotateY(360deg) rotateX(360deg)}}
+@keyframes rotates{50%{transform:translateY(-100px) translateX(950px) rotateY(360deg)}
+100%{transform:translateY(-100px) translateX(950px) rotateX(360deg)}}
 .sq{
 z-index:2;
 position:absolute;
