@@ -8,6 +8,7 @@ height:100%;
 display:block;
 }
 .stage{
+display:inline;
 transform:none;
 transform-style:preserve-3d;
 perspective:100;
@@ -69,7 +70,8 @@ transform:translateX(-200px) rotateY(-90deg)
 		cursor:url('cur/pointer.cur'),pointer;
 	 }
 	 iframe
-	 {
+	 {	
+		 z-index:-1;
 		 height: 700px;
 		 width: 100%;
 		 border:none;
