@@ -8,14 +8,15 @@ height:100%;
 display:block;
 }
 .stage{
-transform:translateX(600px);
+transform:translateX(600px) translateY(200px);
 transform-style:preserve-3d;
 perspective:100;
 perspective-origin:center center;
 animation:rotates 10s infinite;
 }
-@keyframes rotates{to{transform:translateX(600px) rotateY(360deg) rotateX(360deg)}}
+@keyframes rotates{to{transform:translateY(200px) translateX(800px) rotateY(360deg) rotateX(360deg)}}
 .sq{
+z-index:2;
 position:absolute;
 width:400px;
 height:400px;
