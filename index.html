@@ -8,13 +8,13 @@ height:100%;
 display:block;
 }
 .stage{
-transform:translateX(950px) translateY(-200px);
+transform:translateX(950px) translateY(-100px);
 transform-style:preserve-3d;
 perspective:100;
 perspective-origin:center center;
 animation:rotates 10s infinite;
 }
-@keyframes rotates{to{transform:translateY(-200px) translateX(950px) rotateY(360deg) rotateX(360deg)}}
+@keyframes rotates{to{transform:translateY(-100px) translateX(950px) rotateY(360deg) rotateX(360deg)}}
 .sq{
 z-index:2;
 position:absolute;
@@ -24,7 +24,7 @@ height:100px;
 .front{
 background-size:cover;
 background-image: url("bg.jpg");
-transform:translateZ(500px) rotateY(0deg)
+transform:translateZ(50px) rotateY(0deg)
 }
 .left{
 background-size:cover;
