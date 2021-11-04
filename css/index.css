@@ -1663,7 +1663,7 @@ blockquote footer {
 }
 blockquote footer cite:before {
   padding: 0 0.3em;
-  content: '—';
+  content: '鈥�';
 }
 #article-container pre,
 #article-container code {
@@ -4218,7 +4218,7 @@ blockquote footer cite:before {
   text-decoration: underline;
 }
 #article-container img {
-  display: block;
+  display: inline;
   margin: 0 auto 0.8rem;
 }
 #article-container p {
