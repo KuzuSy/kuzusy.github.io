@@ -42,7 +42,7 @@
 		var Snake={
 			len: 1,
 			body: [[0,0]],
-			dx: 1,dy: 0,
+			dx: 0,dy: 0,
 			pathQueue: {
 				head: 1,
 				path: []
@@ -100,6 +100,7 @@
 			var x=Math.round(Math.random()*Map.width)%Map.width,
 				y=Math.round(Math.random()*Map.height)%Map.height;
 			Snake.len=1,Snake.pathQueue.head=1,Snake.body=[],Snake.pathQueue.path=[],Snake.body[0]=[x,y];
+			Snake.dx=0,Snake.dy=0;
 			Snake.insertPath(x,y);
 			Map.appleTag=0;
 			Map.map[Snake.body[0][0]][Snake.body[0][1]]=2;
