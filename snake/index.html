@@ -1,0 +1,168 @@
+<head>
+	<link rel="shortcut icon" href="https://i.loli.net/2021/11/04/Gp6utfB5hy31PSD.jpg">
+	<style>
+		body{
+			display: flex;
+			align-items: center; 
+		}
+		.body,.head{
+			width:40px;
+			height:40px;
+			position: absolute;
+			background-color: black;
+		}
+		.head{
+			background-image: url("imgs/head.png");
+			background-size: cover;
+		}
+		.apple{
+			width:40px;
+			height:40px;
+			position: absolute;
+			background-color: red;
+			background-image: url("imgs/apple.png");
+			background-size: cover;
+		}
+		#container{
+			position: relative;
+			margin: 0 auto;
+			width: 800px;
+			height: 800px;
+			outline: 20px solid black;
+		}	
+	</style>
+</head>
+<body>
+	<div id="container">
+
+	</div>
+	<script>
+		const pixel=40;
+		var changed=0;
+		var Snake={
+			len: 1,
+			body: [[0,0]],
+			dx: 1,dy: 0,
+			pathQueue: {
+				head: 1,
+				path: []
+			},
+			insertPath: function(nx,ny){this.pathQueue.path[this.pathQueue.head++]=[nx,ny];},
+			move: function(){
+				for(var i=0,j=this.pathQueue.head-1;i<this.len;i++,j--){
+					if(this.body[i]!=undefined){
+						var x=this.body[i][0],
+							y=this.body[i][1];
+						Map.map[x][y]=0;
+					}
+					this.body[i]=this.pathQueue.path[j];
+					var x=this.body[i][0],
+						y=this.body[i][1];
+					Map.map[x][y]=2;
+				}
+				for(var i=0;i<this.len;++i){
+					var p=document.getElementById(i);
+					p.style.top=pixel*this.body[i][1];
+					p.style.left=pixel*this.body[i][0];
+				}
+			}
+		}
+		var Map={
+			width: 20,
+			height: 20,
+			map: [],
+			appleTag: 0,
+			generateApple: function(){
+				var p=Math.random();
+				if(this.appleTag&&p<=0.95||p<=0.5)
+					return;
+				var x=Math.round(Math.random()*this.width)%this.width,
+					y=Math.round(Math.random()*this.height)%this.height;
+				while(this.map[x][y]!=0&&y!=this.height)
+				x++,y+=x/this.width,x%=this.width;
+				if(y==this.height)return;
+				this.appleTag++;
+				this.map[x][y]=1;
+				var apple=document.createElement('div');
+				apple.className='apple';
+				apple.id="0"+x+'0'+y;
+				apple.style.top=y*pixel;
+				apple.style.left=x*pixel;
+				document.getElementById("container").appendChild(apple);
+			}
+		};
+		function init(){
+			for(var i=0;i<Map.width;++i){
+				Map.map[i]=[];
+				for(var j=0;j<Map.height;++j)
+					Map.map[i][j]=0;
+			}
+			var x=Math.round(Math.random()*Map.width)%Map.width,
+				y=Math.round(Math.random()*Map.height)%Map.height;
+			Snake.len=1,Snake.pathQueue.head=1,Snake.body=[],Snake.pathQueue.path=[],Snake.body[0]=[x,y];
+			Snake.insertPath(x,y);
+			Map.appleTag=0;
+			Map.map[Snake.body[0][0]][Snake.body[0][1]]=2;
+			var head=document.createElement('div');
+			head.className='head';
+			head.id=0;
+			head.style.top=y*pixel;
+			head.style.left=x*pixel;
+			document.getElementById("container").appendChild(head);
+			return;
+		};
+		function del(name){
+			var p=document.getElementsByClassName(name);
+			for(var i=p.length-1;i>=0;i--)
+				p[i].parentNode.removeChild(p[i]);
+		}
+		function movement(){
+			var nx=Snake.body[0][0]+Snake.dx,ny=Snake.body[0][1]+Snake.dy;
+			if(nx>=Map.width||nx<0||ny>=Map.height||ny<0||Map.map[nx][ny]==2){
+				clearInterval(Runner);
+				if(confirm("You Lost. Again?")==1){
+					del("body");
+					del("apple");
+					del("head");
+					start=0;
+					return init();
+				}
+				else return;
+			}
+			Map.generateApple();
+			if(Map.map[nx][ny]==1){
+				var tail=document.createElement('div');
+				tail.className='body',tail.id=Snake.len++;
+				document.getElementById("container").appendChild(tail);
+				Map.map[nx][ny]=0;
+				document.getElementById('0'+nx+'0'+ny).remove();
+				Map.appleTag--;
+			}
+			Snake.insertPath(nx,ny);
+			Snake.move();
+			changed=0;
+		};
+		var Runner,start=0;
+		init();
+		document.onkeydown=function(event){
+			if(start==0){
+				Runner=setInterval(movement,100);
+				start=1;
+			}
+			if(changed)return;
+			if(event.keyCode==39)
+				if(Snake.dx!=-1)
+					Snake.dx=1,Snake.dy=0;
+			if(event.keyCode==38)
+				if(Snake.dy!=1)
+					Snake.dy=-1,Snake.dx=0;
+			if(event.keyCode==37)
+				if(Snake.dx!=1)
+					Snake.dx=-1,Snake.dy=0;
+			if(event.keyCode==40)
+				if(Snake.dy!=-1)
+					Snake.dy=1,Snake.dx=0;
+			changed=1;
+		}
+	</script>
+</body>
