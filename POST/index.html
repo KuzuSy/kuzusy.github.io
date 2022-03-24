@@ -1,0 +1,44 @@
+<script>
+    function postComment(content, id, token) {
+        var x = new XMLHttpRequest();
+        x.open("POST", "http://sxz.api.zykj.org/api/services/app/appWebSite/ReplyCommentAsync?", false);
+        x.setRequestHeader("Content-Type", "application/json");
+        x.setRequestHeader("Authorization", "Bearer "+token);
+        x.send(JSON.stringify({"commentId":id,"reply":content}));
+    }
+    function login(account, password) {
+        var x = new XMLHttpRequest();
+        x.open("POST", "http://sxz.api.zykj.org/api/TokenAuth/Login", false);
+        x.setRequestHeader("Content-Type", "application/json");
+        x.send(JSON.stringify({"userName": account,"password":password,"clientType":1}));
+        if(JSON.parse(x.response).result==null)return "error";
+        return JSON.parse(x.response).result.accessToken;
+    }
+    function postText(txt, id, token){
+        var p=0,s=txt.length,m=250;
+        while(p<s){
+            var sub=txt.substring(p,p+m);
+            postComment(sub, id, token);
+            p+=m;
+            G.innerText=Math.min(p,s)/s*100+"%";
+        }
+    }
+    var token;
+</script>
+<body>
+    <input type=text id="A" placeholder="Account">
+    <input type=password id="B" placeholder="Password">
+    <input type=button value="Login" onclick="sessionStorage.A=A.value;sessionStorage.B=B.value;token=login(A.value,B.value);if(token!='error')this.value='Success';else this.value='Error'">
+    <br><input type=number id="C" placeholder="CommentId">
+    <input type=button value="Send" onclick="setTimeout(postText(D.value,sessionStorage.C=C.value,token))"><br>
+    <textarea style="width:50%;height: 70%;" id="D" placeholder="Content"></textarea>
+    <p id="G" style="color:red"></p>
+    <script>
+        if(sessionStorage.A!=undefined)
+            A.value=sessionStorage.A;
+        if(sessionStorage.B!=undefined)
+            B.value=sessionStorage.B;
+        if(sessionStorage.C!=undefined)
+            C.value=sessionStorage.C;
+    </script>
+</body>
